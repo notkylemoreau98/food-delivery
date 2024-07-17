@@ -1,18 +1,18 @@
 import mongoose, { Schema, Document, Model } from 'mongoose';
 
 interface VendorDoc extends Document {
-  name: String;
-  ownerName: String;
-  foodType: [String];
-  pincode: String;
-  address: String;
-  phone: String;
-  email: String;
-  password: String;
-  salt: String;
-  serviceAvailable: String;
-  coverImages: [String];
-  rating: Number;
+  name: string;
+  ownerName: string;
+  foodType: [string];
+  pincode: string;
+  address: string;
+  phone: string;
+  email: string;
+  password: string;
+  salt: string;
+  serviceAvailable: boolean;
+  coverImages: [string];
+  rating: number;
   // foods: any;
 }
 
