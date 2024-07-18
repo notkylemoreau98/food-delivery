@@ -1,25 +1,18 @@
 import express from 'express';
-import bodyParser from 'body-parser';
-import mongoose from 'mongoose';
+import App from './services/ExpressApp';
+import dbConnection from './services/Database';
+//import { PORT } from './config';
 
-import { AdminRoute, VendorRoute } from './routes';
-import { MONGO_URI } from './config';
+const StartServer = async () => {
+  const PORT = 3000;
+  const app = express();
 
-const app = express();
-const PORT = 3000;
+  await dbConnection();
+  await App(app);
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+  app.listen(PORT, () => {
+    console.log(`Listening to port ${PORT}`);
+  });
+};
 
-app.use('/admin', AdminRoute);
-app.use('/Vendor', VendorRoute);
-
-mongoose
-  .connect(MONGO_URI)
-  .then(() => console.log('DB CONNECTED'))
-  .catch((err) => console.log('ERROR: ', err));
-
-app.listen(PORT, () => {
-  console.clear();
-  console.log(`App is listening on Port ${PORT}`);
-});
+StartServer();
